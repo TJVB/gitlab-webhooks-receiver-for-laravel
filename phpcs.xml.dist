@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<ruleset name="GitLab webhooks receiver for Laravel">
+    <description>The coding standard for GitLab webhooks receiver for Laravel.</description>
+    <file>./src/</file>
+    <file>./tests/</file>
+    <arg name="extensions" value="php"/>
+
+    <rule ref="PSR12">
+    </rule>
+    <rule ref="Generic.PHP.ForbiddenFunctions">
+      <properties>
+        <property name="forbiddenFunctions" type="array" value="sizeof=>count,delete=>unset,dump=>null,dd=>null,print_r=>null,var_dump=>null,exit=>null"/>
+      </properties>
+    </rule>
+</ruleset>
