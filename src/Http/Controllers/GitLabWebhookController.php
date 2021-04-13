@@ -14,10 +14,12 @@ class GitLabWebhookController extends Controller
      * Handle the incoming request.
      *
      * @param GiLabWebhookRequest $request
-     * @return \Illuminate\Http\Response
+     *
+     * @return Response
      */
-    public function __invoke(GiLabWebhookRequest $request): \Illuminate\Http\Response
+    public function __invoke(GiLabWebhookRequest $request): Response
     {
+        unset($request);
         return new Response('todo');
     }
 }
