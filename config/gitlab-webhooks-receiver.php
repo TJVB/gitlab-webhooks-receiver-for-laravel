@@ -13,4 +13,8 @@ return [
     'name' => 'gitlabwebhookreceiver',
 
 
+    /**
+     * The actions that does one thing and one thing only
+     */
+    'store_request_action' => \TJVB\GitLabWebhooks\Actions\StoreInComingWebhookRequestData::class,
 ];
