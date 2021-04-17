@@ -6,11 +6,12 @@ namespace TJVB\GitLabWebhooks\Actions;
 
 use Illuminate\Support\Arr;
 use JsonException;
+use TJVB\GitLabWebhooks\Contracts\Actions\InComingWebhookRequestStoring;
 use TJVB\GitLabWebhooks\Exceptions\InvalidInputException;
 use TJVB\GitLabWebhooks\Http\Requests\GitLabWebhookRequest;
 use TJVB\GitLabWebhooks\Models\GitLabHook;
 
-class StoreInComingWebhookRequestData implements \TJVB\GitLabWebhooks\Contracts\Actions\InComingWebhookRequestStoring
+class StoreInComingWebhookRequestData implements InComingWebhookRequestStoring
 {
 
     public function handle(GitLabWebhookRequest $request): void
@@ -21,11 +22,11 @@ class StoreInComingWebhookRequestData implements \TJVB\GitLabWebhooks\Contracts\
         } catch (JsonException $jsonException) {
             throw InvalidInputException::fromJsonException($jsonException);
         }
-        $hook = $this->createHook();
+        $hook = $this->createHook($body, $request);
         unset($hook);
     }
 
-    private function createHook(string $body, GitLabWebhookRequest $request)
+    private function createHook(array $body, GitLabWebhookRequest $request)
     {
         $data = [
             'body' => $body,
