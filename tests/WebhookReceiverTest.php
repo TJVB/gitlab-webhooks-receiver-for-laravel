@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace TJVB\GitLabWebhooks\Tests;
 
+use Exception;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Http\Response;
+use Symfony\Component\HttpFoundation\Response;
+use TJVB\GitLabWebhooks\Contracts\Actions\InComingWebhookRequestStoring;
+use TJVB\GitLabWebhooks\Tests\Fixtures\WebHookStoring;
 
 class WebhookReceiverTest extends TestCase
 {
@@ -16,12 +19,16 @@ class WebhookReceiverTest extends TestCase
      */
     public function weCanStoreAValidRequest(): void
     {
-        $this->markTestIncomplete('TODO');
         // setup / mock
+        $storing = new WebHookStoring();
+
+        $this->app->instance(InComingWebhookRequestStoring::class, $storing);
 
         // run
+        $response = $this->post(config('gitlab-webhooks-receiver.url', '/gitlabwebhook'), ['']);
 
         // verify/assert
+        $response->assertCreated();
     }
 
     /**
@@ -43,11 +50,18 @@ class WebhookReceiverTest extends TestCase
      */
     public function weGetAnInternalServerErrorIfWeHaveAnUnknownError(): void
     {
-        $this->markTestIncomplete('TODO');
         // setup / mock
+        $storing = new WebHookStoring();
+        $storing->behaviour = static function () {
+            throw new Exception('Test exception');
+        };
+
+        $this->app->instance(InComingWebhookRequestStoring::class, $storing);
 
         // run
+        $response = $this->post(config('gitlab-webhooks-receiver.url', '/gitlabwebhook'), ['']);
 
         // verify/assert
+        $response->assertStatus(Response::HTTP_INTERNAL_SERVER_ERROR);
     }
 }
