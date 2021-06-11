@@ -40,6 +40,19 @@ phpmd:
     - phpmd src/ text phpmd.xml.dist
   dependencies: []
 
+phpstan:
+  stage: check
+  script:
+    # check for phpstan errors
+    - vendor/bin/phpstan analyse --error-format=gitlab > phpstan.json
+    - cat phpstan.json
+  dependencies:
+    - prepare_cache
+  artifacts:
+    paths:
+      - phpstan.json
+    when: always
+
 test_lowest:
   stage: test
   image: registry.gitlab.com/tjvb/phpimages:php74

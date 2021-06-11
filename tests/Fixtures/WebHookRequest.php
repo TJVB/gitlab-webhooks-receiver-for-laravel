@@ -16,7 +16,7 @@ class WebHookRequest implements GitLabWebhookRequest
     public function getContent()
     {
         if (is_callable($this->content)) {
-            return $this->content();
+            return call_user_func($this->content);
         }
         return $this->content;
     }
