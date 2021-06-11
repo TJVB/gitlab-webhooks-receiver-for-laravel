@@ -8,13 +8,13 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use TJVB\GitLabWebhooks\Contracts\Actions\InComingWebhookRequestStoring;
-use TJVB\GitLabWebhooks\Contracts\Requests\GiLabWebhookRequest;
+use TJVB\GitLabWebhooks\Contracts\Requests\GitLabWebhookRequest;
 use TJVB\GitLabWebhooks\Exceptions\Exception;
 use TJVB\GitLabWebhooks\Exceptions\InvalidInputException;
 
 class GitLabWebhookController extends Controller
 {
-    public function __invoke(InComingWebhookRequestStoring $requestStoring, GiLabWebhookRequest $request): JsonResponse
+    public function __invoke(InComingWebhookRequestStoring $requestStoring, GitLabWebhookRequest $request): JsonResponse
     {
         try {
             $requestStoring->handle($request);

@@ -4,7 +4,11 @@ declare(strict_types=1);
 
 namespace TJVB\GitLabWebhooks\Tests;
 
-class WebhookDataStoringTest
+use TJVB\GitLabWebhooks\Actions\StoreInComingWebhookRequestData;
+use TJVB\GitLabWebhooks\Exceptions\InvalidInputException;
+use TJVB\GitLabWebhooks\Tests\Fixtures\WebHookRequest;
+
+class WebhookDataStoringTest extends TestCase
 {
     /**
      * @test
@@ -22,12 +26,16 @@ class WebhookDataStoringTest
     /**
      * @test
      */
-    public function weGetAnExceptionIfWeHaveInvallidJson(): void
+    public function weGetAnExceptionIfWeHaveInvalidJson(): void
     {
-        $this->markTestIncomplete('TODO');
-// setup / mock
+        // setup / mock
+        $request = new WebHookRequest();
+        $request->content = 'invalid json';
 
+        $this->expectException(InvalidInputException::class);
         // run
+        $storing = new StoreInComingWebhookRequestData();
+        $storing->handle($request);
 
         // verify/assert
     }

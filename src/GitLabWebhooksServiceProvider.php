@@ -6,7 +6,7 @@ namespace TJVB\GitLabWebhooks;
 
 use Illuminate\Support\ServiceProvider;
 use TJVB\GitLabWebhooks\Contracts\Actions\InComingWebhookRequestStoring;
-use TJVB\GitLabWebhooks\Contracts\Requests\GiLabWebhookRequest;
+use TJVB\GitLabWebhooks\Contracts\Requests\GitLabWebhookRequest;
 
 class GitLabWebhooksServiceProvider extends ServiceProvider
 {
@@ -33,7 +33,7 @@ class GitLabWebhooksServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/gitlab-webhooks-receiver.php', 'gitlab-webhooks-receiver');
-        $this->app->bind(GiLabWebhookRequest::class, config('gitlab-webhooks-receiver.request'));
+        $this->app->bind(GitLabWebhookRequest::class, config('gitlab-webhooks-receiver.request'));
         $this->app->bind(InComingWebhookRequestStoring::class, config('gitlab-webhooks-receiver.store_request_action'));
     }
 }

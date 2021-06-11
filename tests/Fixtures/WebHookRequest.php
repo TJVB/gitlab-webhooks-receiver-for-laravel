@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace TJVB\GitLabWebhooks\Tests\Fixtures;
 
 use Illuminate\Support\Arr;
-use TJVB\GitLabWebhooks\Contracts\Requests\GiLabWebhookRequest;
+use TJVB\GitLabWebhooks\Contracts\Requests\GitLabWebhookRequest;
 
-class WebHookRequest implements GiLabWebhookRequest
+class WebHookRequest implements GitLabWebhookRequest
 {
     public $content = null;
 

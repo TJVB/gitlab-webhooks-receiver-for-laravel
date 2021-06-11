@@ -7,8 +7,8 @@ namespace TJVB\GitLabWebhooks\Actions;
 use Illuminate\Support\Arr;
 use JsonException;
 use TJVB\GitLabWebhooks\Contracts\Actions\InComingWebhookRequestStoring;
+use TJVB\GitLabWebhooks\Contracts\Requests\GitLabWebhookRequest;
 use TJVB\GitLabWebhooks\Exceptions\InvalidInputException;
-use TJVB\GitLabWebhooks\Http\Requests\GitLabWebhookRequest;
 use TJVB\GitLabWebhooks\Models\GitLabHook;
 
 class StoreInComingWebhookRequestData implements InComingWebhookRequestStoring
