@@ -17,8 +17,9 @@ class WebHookStoring implements InComingWebhookRequestStoring
      */
     public function handle(GitLabWebhookRequest $request): void
     {
+
         if (is_callable($this->behaviour)) {
-            $this->behaviour();
+            call_user_func($this->behaviour);
         }
     }
 }
