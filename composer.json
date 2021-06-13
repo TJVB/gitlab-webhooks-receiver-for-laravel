@@ -1,7 +1,14 @@
 {
     "name": "tjvb/gitlab-webhooks-receiver-for-laravel",
     "type": "library",
-    "description": "Receive webhooks from GitLab",
+    "description": "Receive webhooks from GitLab and store the data in the database.",
+    "keywords": [
+        "tjvb",
+        "gitlab",
+        "laravel",
+        "webhook"
+    ],
+    "homepage": "https://gitlab.com/tjvb/gitlab-webhooks-receiver-for-laravel",
     "readme": "README.md",
     "license": "MIT",
     "authors": [
