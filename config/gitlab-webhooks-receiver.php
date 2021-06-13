@@ -17,4 +17,14 @@ return [
      * The actions that does one thing and one thing only
      */
     'store_request_action' => \TJVB\GitLabWebhooks\Actions\StoreInComingWebhookRequestData::class,
+
+    /**
+     * The model that represent the data
+     */
+    'hook_model' => \TJVB\GitLabWebhooks\Models\GitLabHook::class,
+
+    /**
+     * The dispatched event if an hook is stored
+     */
+    'hook_stored_event' => \TJVB\GitLabWebhooks\Events\HookStored::class,
 ];

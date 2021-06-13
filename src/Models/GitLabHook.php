@@ -6,8 +6,9 @@ namespace TJVB\GitLabWebhooks\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use TJVB\GitLabWebhooks\Contracts\Models\GitLabHookModel;
 
-class GitLabHook extends Model
+class GitLabHook extends Model implements GitLabHookModel
 {
     use SoftDeletes;
 
@@ -33,4 +34,9 @@ class GitLabHook extends Model
         'system_hook',
         'body',
     ];
+
+    public function isSystemHook(): bool
+    {
+        return (bool) $this->getAttribute('system_hook');
+    }
 }

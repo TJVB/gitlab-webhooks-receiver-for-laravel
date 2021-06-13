@@ -4,15 +4,27 @@ declare(strict_types=1);
 
 namespace TJVB\GitLabWebhooks\Actions;
 
+use Illuminate\Contracts\Config\Repository;
+use Illuminate\Contracts\Container\Container;
+use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Support\Arr;
 use JsonException;
 use TJVB\GitLabWebhooks\Contracts\Actions\InComingWebhookRequestStoring;
+use TJVB\GitLabWebhooks\Contracts\Events\GitLabHookStored;
+use TJVB\GitLabWebhooks\Contracts\Models\GitLabHookModel;
 use TJVB\GitLabWebhooks\Contracts\Requests\GitLabWebhookRequest;
 use TJVB\GitLabWebhooks\Exceptions\InvalidInputException;
-use TJVB\GitLabWebhooks\Models\GitLabHook;
 
 class StoreInComingWebhookRequestData implements InComingWebhookRequestStoring
 {
+    private Container $container;
+    private Dispatcher $dispatcher;
+
+    public function __construct(Container $container, Dispatcher $dispatcher)
+    {
+        $this->container = $container;
+        $this->dispatcher = $dispatcher;
+    }
 
     public function handle(GitLabWebhookRequest $request): void
     {
@@ -23,18 +35,21 @@ class StoreInComingWebhookRequestData implements InComingWebhookRequestStoring
             throw InvalidInputException::fromJsonException($jsonException);
         }
         $hook = $this->createHook($body, $request);
-        unset($hook);
+        $event = $this->container->make(GitLabHookStored::class, [
+            'model' => $hook
+        ]);
+        $this->dispatcher->dispatch($event);
     }
 
-    private function createHook(array $body, GitLabWebhookRequest $request)
+    private function createHook(array $body, GitLabWebhookRequest $request): GitLabHookModel
     {
-        $data = [
-            'body' => $body,
-            'object_kind' => Arr::get($body, 'object_kind'),
-            'event_type' => Arr::get($body, 'event_type'),
-            'event_name' => Arr::get($body, 'event_name'),
-            'system_hook' => $request->header('X-Gitlab-Event') === 'System Hook',
-        ];
-        return GitLabHook::create($data);
+        $model = $this->container->make(GitLabHookModel::class);
+        $model->body = $body;
+        $model->object_kind = Arr::get($body, 'object_kind');
+        $model->event_type = Arr::get($body, 'event_type');
+        $model->event_name = Arr::get($body, 'event_name');
+        $model->system_hook = $request->header('X-Gitlab-Event') === 'System Hook';
+        $model->save();
+        return $model;
     }
 }
