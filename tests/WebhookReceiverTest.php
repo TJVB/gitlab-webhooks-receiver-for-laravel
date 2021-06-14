@@ -21,6 +21,7 @@ class WebhookReceiverTest extends TestCase
     public function weCanStoreAValidRequest(): void
     {
         // setup / mock
+        $this->withoutMiddleware();
         $storing = new WebHookStoring();
 
         $this->app->instance(InComingWebhookRequestStoring::class, $storing);
@@ -38,6 +39,7 @@ class WebhookReceiverTest extends TestCase
     public function weGetABadRequestIfWeHaveInvalidData(): void
     {
         // setup / mock
+        $this->withoutMiddleware();
         $storing = new WebHookStoring();
         $storing->behaviour = static function () {
             throw new InvalidInputException('Test exception');
@@ -59,6 +61,7 @@ class WebhookReceiverTest extends TestCase
     public function weGetAnInternalServerErrorIfWeHaveAnUnknownError(): void
     {
         // setup / mock
+        $this->withoutMiddleware();
         $storing = new WebHookStoring();
         $storing->behaviour = static function () {
             throw new Exception('Test exception');

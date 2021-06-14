@@ -8,9 +8,19 @@ return [
     'controller' => \TJVB\GitLabWebhooks\Http\Controllers\GitLabWebhookController::class,
     // The request need to implement \TJVB\GitLabWebhooks\Contracts\Requests\GitLabWebhookRequest
     'request' => \TJVB\GitLabWebhooks\Http\Requests\GitLabWebhookRequest::class,
-    'middleware' => [],
+    'middleware' => [
+        \TJVB\GitLabWebhooks\Http\Middleware\EnsureSecretTokenIsValid::class,
+    ],
     'url' => 'gitlabwebhook',
     'name' => 'gitlabwebhookreceiver',
+
+    /**
+     * A list with valid secrets for the webhooks, a secret can be added to the webhook.
+     * See: https://docs.gitlab.com/ee/user/project/integrations/webhooks.html#secret-token
+     */
+    'valid_secrets' => [
+        env('GITLAB_WEBHOOK_SECRET'),
+    ],
 
 
     /**
@@ -27,4 +37,5 @@ return [
      * The dispatched event if an hook is stored
      */
     'hook_stored_event' => \TJVB\GitLabWebhooks\Events\HookStored::class,
+
 ];
