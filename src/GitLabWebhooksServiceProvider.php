@@ -25,16 +25,12 @@ class GitLabWebhooksServiceProvider extends ServiceProvider
 
         $this->loadRoutesFrom(__DIR__ . '/../routes/api.php');
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
-
-        if ($this->app->runningInConsole()) {
-            $this->commands([
-            ]);
-        }
     }
 
     public function register()
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/gitlab-webhooks-receiver.php', 'gitlab-webhooks-receiver');
+
         $this->app->bind(GitLabWebhookRequest::class, config('gitlab-webhooks-receiver.request'));
         $this->app->bind(InComingWebhookRequestStoring::class, config('gitlab-webhooks-receiver.store_request_action'));
         $this->app->bind(GitLabHookModel::class, config('gitlab-webhooks-receiver.hook_model'));

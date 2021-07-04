@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace TJVB\GitLabWebhooks\Actions;
 
-use Illuminate\Contracts\Config\Repository;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Support\Arr;
@@ -34,14 +33,14 @@ class StoreInComingWebhookRequestData implements InComingWebhookRequestStoring
         } catch (JsonException $jsonException) {
             throw InvalidInputException::fromJsonException($jsonException);
         }
-        $hook = $this->createHook($body, $request);
+        $gitLabHookModel = $this->createHookModel($body, $request);
         $event = $this->container->make(GitLabHookStored::class, [
-            'model' => $hook
+            'model' => $gitLabHookModel
         ]);
         $this->dispatcher->dispatch($event);
     }
 
-    private function createHook(array $body, GitLabWebhookRequest $request): GitLabHookModel
+    private function createHookModel(array $body, GitLabWebhookRequest $request): GitLabHookModel
     {
         $model = $this->container->make(GitLabHookModel::class);
         $model->body = $body;

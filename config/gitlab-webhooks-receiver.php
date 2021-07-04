@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+
 return [
 
     /**
@@ -24,12 +25,12 @@ return [
 
 
     /**
-     * The actions that does one thing and one thing only
+     * The actions that does one thing and one thing only, storing the webhook data.
      */
     'store_request_action' => \TJVB\GitLabWebhooks\Actions\StoreInComingWebhookRequestData::class,
 
     /**
-     * The model that represent the data
+     * The model that represent the data and store it in the database
      */
     'hook_model' => \TJVB\GitLabWebhooks\Models\GitLabHook::class,
 
