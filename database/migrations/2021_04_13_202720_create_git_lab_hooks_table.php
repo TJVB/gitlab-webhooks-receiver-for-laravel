@@ -18,7 +18,7 @@ class CreateGitLabHooksTable extends Migration
             $table->string('object_kind')->nullable();
             $table->string('event_type')->nullable();
             $table->string('event_name')->nullable();
-            $table->boolean('system_hook')->default('false');
+            $table->boolean('system_hook')->default(false);
             $table->jsonb('body');
             $table->timestamps();
             $table->softDeletes();
