@@ -104,3 +104,18 @@ test_php80:
     - prepare_cache
   needs:
     - prepare_cache
+
+test_php81:
+  stage: test
+  image: registry.gitlab.com/tjvb/phpimages:php81
+  script:
+    - vendor/bin/phpunit --coverage-text --colors=never --coverage-cobertura=phpunitresult/cobertura-coverage.xml --log-junit=phpunitresult/junit.xml
+    - sed -i 's~ filename="~ filename="src/~' phpunitresult/cobertura-coverage.xml
+  artifacts:
+    reports:
+      junit: phpunitresult/junit.xml
+      cobertura: phpunitresult/cobertura-coverage.xml
+  dependencies:
+    - prepare_cache
+  needs:
+    - prepare_cache
