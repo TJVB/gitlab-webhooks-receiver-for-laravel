@@ -20,11 +20,11 @@
     ],
     "require": {
         "php": "~7.4.0 || ~8.0.0 || ~8.1.0",
-        "laravel/framework": "^8.0"
+        "laravel/framework": "^8.0 || ^9.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.14",
-        "orchestra/testbench": "^6.17",
+        "orchestra/testbench": "^6.17 || ^7.0",
         "phpstan/phpstan": "^0.12.89",
         "phpunit/phpunit": "^9.5",
         "squizlabs/php_codesniffer": "^3.5"
@@ -49,6 +49,8 @@
             "TJVB\\GitLabWebhooks\\Tests\\": "tests/"
         }
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "support": {
         "issues": "https://gitlab.com/tjvb/gitlab-webhooks-receiver-for-laravel/-/issues",
         "source": "https://gitlab.com/tjvb/gitlab-webhooks-receiver-for-laravel/-/tree/master"
