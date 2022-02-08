@@ -4,6 +4,7 @@ All notable changes to `tjvb/gitlab-webhooks-receiver-for-laravel` will be docum
 
 ## Unreleased
 
+## 1.2.0 - 2022-02-08
 ### Added
 - Add support for Laravel 9
 
