@@ -12,7 +12,6 @@ use TJVB\GitLabWebhooks\Contracts\Requests\GitLabWebhookRequest;
 
 class GitLabWebhooksServiceProvider extends ServiceProvider
 {
-
     public function boot(): void
     {
         $this->publishes([

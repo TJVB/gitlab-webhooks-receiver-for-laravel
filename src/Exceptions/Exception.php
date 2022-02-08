@@ -6,5 +6,4 @@ namespace TJVB\GitLabWebhooks\Exceptions;
 
 class Exception extends \Exception
 {
-
 }
