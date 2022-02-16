@@ -39,4 +39,45 @@ class GitLabHook extends Model implements GitLabHookModel
     {
         return (bool) $this->getAttribute('system_hook');
     }
+
+    public function getBody(): array
+    {
+        return $this->getAttribute('body');
+    }
+
+    public function getEventType(): string
+    {
+        return (string) $this->getAttribute('event_type');
+    }
+
+    public function getEventName(): string
+    {
+        return (string) $this->getAttribute('event_name');
+    }
+
+    public function getObjectKind(): string
+    {
+        return (string) $this->getAttribute('object_kind');
+    }
+
+    public function store(
+        array $body,
+        string $eventName,
+        string $eventType,
+        string $objectKind,
+        bool $systemHook
+    ): GitLabHookModel {
+        $hook = new self();
+        $hook->fill(
+            [
+                'body' => $body,
+                'event_name' => $eventName,
+                'event_type' => $eventType,
+                'object_kind' => $objectKind,
+                'system_hook' => $systemHook,
+            ]
+        );
+        $hook->save();
+        return $hook;
+    }
 }
