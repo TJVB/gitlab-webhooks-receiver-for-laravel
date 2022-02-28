@@ -23,4 +23,6 @@ interface GitLabHookModel
         string $objectKind,
         bool $systemHook
     ): GitLabHookModel;
+
+    public function remove(): void;
 }

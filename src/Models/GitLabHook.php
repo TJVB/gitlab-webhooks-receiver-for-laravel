@@ -80,4 +80,8 @@ class GitLabHook extends Model implements GitLabHookModel
         $hook->save();
         return $hook;
     }
+
+    public function remove(): void{
+        $this->delete();
+    }
 }
