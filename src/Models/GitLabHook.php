@@ -81,7 +81,8 @@ class GitLabHook extends Model implements GitLabHookModel
         return $hook;
     }
 
-    public function remove(): void{
+    public function remove(): void
+    {
         $this->delete();
     }
 }
