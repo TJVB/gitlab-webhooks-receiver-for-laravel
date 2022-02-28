@@ -7,7 +7,6 @@ namespace TJVB\GitLabWebhooks\Tests;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Support\Facades\Event;
 use TJVB\GitLabWebhooks\Actions\StoreInComingWebhookRequestData;
-use TJVB\GitLabWebhooks\Contracts\Events\GitLabHookStored;
 use TJVB\GitLabWebhooks\Events\HookStored;
 use TJVB\GitLabWebhooks\Exceptions\InvalidInputException;
 use TJVB\GitLabWebhooks\Tests\Fixtures\WebHookRequest;

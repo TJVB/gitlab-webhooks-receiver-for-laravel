@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace TJVB\GitLabWebhooks\Models;
 
+use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use TJVB\GitLabWebhooks\Contracts\Models\GitLabHookModel;
@@ -84,5 +85,10 @@ class GitLabHook extends Model implements GitLabHookModel
     public function remove(): void
     {
         $this->delete();
+    }
+
+    public function getCreatedAt(): CarbonImmutable
+    {
+        return $this->getAttribute('created_at')->toImmutable();
     }
 }

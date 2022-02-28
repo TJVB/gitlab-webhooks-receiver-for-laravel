@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace TJVB\GitLabWebhooks\Contracts\Models;
 
+use Carbon\CarbonImmutable;
+
 interface GitLabHookModel
 {
     public function isSystemHook(): bool;
@@ -15,6 +17,8 @@ interface GitLabHookModel
     public function getEventName(): string;
 
     public function getObjectKind(): string;
+
+    public function getCreatedAt(): CarbonImmutable;
 
     public function store(
         array $body,
