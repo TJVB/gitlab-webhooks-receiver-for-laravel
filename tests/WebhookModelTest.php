@@ -12,20 +12,19 @@ use TJVB\GitLabWebhooks\Models\GitLabHook;
 class WebhookModelTest extends TestCase
 {
     use DatabaseMigrations;
-                                                                                                                                                                                                                                                                                                                       use WithFaker;
+    use WithFaker;
 
-/**
+    /**
      * @test
      */
-
-
     public function weImplementTheContract(): void
     {
         // setup / mock
 
         // run
         $gitlabHook = new GitLabHook();
-    // verify/assert
+
+        // verify/assert
         $this->assertInstanceOf(GitLabHookModel::class, $gitlabHook);
     }
     /**
@@ -40,9 +39,11 @@ class WebhookModelTest extends TestCase
         $eventType = $this->faker->word();
         $objectKind = $this->faker->word();
         $systemHook = $this->faker->boolean();
-// run
+
+        // run
         $savedHook = $gitlabHook->store($body, $eventName, $eventType, $objectKind, $systemHook);
-// verify/assert
+
+        // verify/assert
         $this->assertEquals($body, $savedHook->getBody());
         $this->assertEquals($eventName, $savedHook->getEventName());
         $this->assertEquals($eventType, $savedHook->getEventType());
