@@ -42,13 +42,16 @@ class StoreInComingWebhookRequestData implements InComingWebhookRequestStoring
 
     private function createHookModel(array $body, GitLabWebhookRequest $request): GitLabHookModel
     {
+        /**
+         * @var GitLabHookModel $model
+         */
         $model = $this->container->make(GitLabHookModel::class);
-        $model->body = $body;
-        $model->object_kind = Arr::get($body, 'object_kind');
-        $model->event_type = Arr::get($body, 'event_type');
-        $model->event_name = Arr::get($body, 'event_name');
-        $model->system_hook = $request->header('X-Gitlab-Event') === 'System Hook';
-        $model->save();
-        return $model;
+        return $model->store(
+            $body,
+            Arr::get($body, 'event_name', ''),
+            Arr::get($body, 'event_type', ''),
+            Arr::get($body, 'object_kind', ''),
+            $request->header('X-Gitlab-Event') === 'System Hook'
+        );
     }
 }

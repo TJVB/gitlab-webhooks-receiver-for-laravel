@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace TJVB\GitLabWebhooks\Models;
 
+use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use TJVB\GitLabWebhooks\Contracts\Models\GitLabHookModel;
@@ -38,5 +39,56 @@ class GitLabHook extends Model implements GitLabHookModel
     public function isSystemHook(): bool
     {
         return (bool) $this->getAttribute('system_hook');
+    }
+
+    public function getBody(): array
+    {
+        return $this->getAttribute('body');
+    }
+
+    public function getEventType(): string
+    {
+        return (string) $this->getAttribute('event_type');
+    }
+
+    public function getEventName(): string
+    {
+        return (string) $this->getAttribute('event_name');
+    }
+
+    public function getObjectKind(): string
+    {
+        return (string) $this->getAttribute('object_kind');
+    }
+
+    public function store(
+        array $body,
+        string $eventName,
+        string $eventType,
+        string $objectKind,
+        bool $systemHook
+    ): GitLabHookModel {
+        $hook = new self();
+        $hook->fill(
+            [
+                'body' => $body,
+                'event_name' => $eventName,
+                'event_type' => $eventType,
+                'object_kind' => $objectKind,
+                'system_hook' => $systemHook,
+            ]
+        );
+        $hook->save();
+        return $hook;
+    }
+
+    public function remove(): void
+    {
+        $this->delete();
+    }
+
+    public function getCreatedAt(): CarbonImmutable
+    {
+        return $this->getAttribute('created_at')->toImmutable();
     }
 }
