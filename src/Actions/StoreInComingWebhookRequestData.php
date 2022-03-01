@@ -7,12 +7,14 @@ namespace TJVB\GitLabWebhooks\Actions;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Support\Arr;
-use JsonException;
+use Safe\Exceptions\JsonException;
 use TJVB\GitLabWebhooks\Contracts\Actions\InComingWebhookRequestStoring;
 use TJVB\GitLabWebhooks\Contracts\Events\GitLabHookStored;
 use TJVB\GitLabWebhooks\Contracts\Models\GitLabHookModel;
 use TJVB\GitLabWebhooks\Contracts\Requests\GitLabWebhookRequest;
 use TJVB\GitLabWebhooks\Exceptions\InvalidInputException;
+
+use function Safe\json_decode;
 
 class StoreInComingWebhookRequestData implements InComingWebhookRequestStoring
 {
@@ -29,7 +31,7 @@ class StoreInComingWebhookRequestData implements InComingWebhookRequestStoring
     {
         try {
             $content = $request->getContent();
-            $body = json_decode($content, true, 512, JSON_THROW_ON_ERROR);
+            $body = json_decode($content, true);
         } catch (JsonException $jsonException) {
             throw InvalidInputException::fromJsonException($jsonException);
         }

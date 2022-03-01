@@ -11,6 +11,8 @@ use TJVB\GitLabWebhooks\Events\HookStored;
 use TJVB\GitLabWebhooks\Exceptions\InvalidInputException;
 use TJVB\GitLabWebhooks\Tests\Fixtures\WebHookRequest;
 
+use function Safe\json_encode;
+
 class WebhookDataStoringTest extends TestCase
 {
     use DatabaseMigrations;

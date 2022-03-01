@@ -49,6 +49,7 @@ class WebhookMiddlewareTest extends TestCase
         // verify/assert
         $this->assertInstanceOf(JsonResponse::class, $result);
         $this->assertEquals(JsonResponse::HTTP_FORBIDDEN, $result->status());
+        $this->assertStringContainsString('invalid token', $result->getContent());
     }
 
     /**
@@ -69,6 +70,7 @@ class WebhookMiddlewareTest extends TestCase
         // verify/assert
         $this->assertInstanceOf(JsonResponse::class, $result);
         $this->assertEquals(JsonResponse::HTTP_FORBIDDEN, $result->status());
+        $this->assertStringContainsString('invalid token', $result->getContent());
     }
 
     /**
@@ -88,6 +90,7 @@ class WebhookMiddlewareTest extends TestCase
         // verify/assert
         $this->assertInstanceOf(JsonResponse::class, $result);
         $this->assertEquals(JsonResponse::HTTP_FORBIDDEN, $result->status());
+        $this->assertStringContainsString('invalid token', $result->getContent());
     }
 
     private function getNextClosure(): Closure
