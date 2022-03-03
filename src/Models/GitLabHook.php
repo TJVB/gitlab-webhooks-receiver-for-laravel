@@ -38,7 +38,7 @@ class GitLabHook extends Model implements GitLabHookModel
 
     public function isSystemHook(): bool
     {
-        return (bool) $this->getAttribute('system_hook');
+        return $this->getAttribute('system_hook');
     }
 
     public function getBody(): array
@@ -48,17 +48,17 @@ class GitLabHook extends Model implements GitLabHookModel
 
     public function getEventType(): string
     {
-        return (string) $this->getAttribute('event_type');
+        return $this->getAttribute('event_type');
     }
 
     public function getEventName(): string
     {
-        return (string) $this->getAttribute('event_name');
+        return $this->getAttribute('event_name');
     }
 
     public function getObjectKind(): string
     {
-        return (string) $this->getAttribute('object_kind');
+        return $this->getAttribute('object_kind');
     }
 
     public function store(

@@ -1,0 +1,20 @@
+{
+    "$schema": "vendor/infection/infection/resources/schema.json",
+    "source": {
+        "directories": [
+            "src"
+        ],
+        "excludes": [
+            "GitLabWebhooksServiceProvider.php"
+        ]
+    },
+    "logs": {
+        "text": "build/infection/infection.log",
+        "summary": "build/infection/infection-summary.log",
+        "json": "build/infection/infection-log.json",
+        "perMutator": "build/infection/infection-per-mutator.md"
+    },
+    "mutators": {
+        "@default": true
+    }
+}
