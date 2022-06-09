@@ -35,7 +35,10 @@
         "thecodingmachine/phpstan-safe-rule": "^1.2"
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "infection/extension-installer": true
+        }
     },
     "extra": {
         "laravel": {
