@@ -1,12 +1,15 @@
 # Changelog
 
-All notable changes to `tjvb/gitlab-webhooks-receiver-for-laravel` will be documented in this file
+All notable changes to `tjvb/gitlab-webhooks-receiver-for-laravel` will be documented in this file.
 
 ## Unreleased
 
 ### Added
 - Add infection to level up the test quality
-- Add Safe php
+- Add [Safe php](https://packagist.org/packages/thecodingmachine/safe) as requirement.
+- Breaking: Add the getBody, getEventType, getEventName, getObjectKind, getCreatedAt, store and remove functions to the GitLabHookModel interface.
+- Add ext-json as required php extension, this was already needed but now explicit required in composer.json. 
+
 
 ### Removed
 - Remove PHP 7.4 support.
