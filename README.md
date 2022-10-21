@@ -25,7 +25,7 @@ php artisan migrate
 4. Set the `GITLAB_WEBHOOK_SECRET` env variable (most used version is to set it in the .env file) to have the token you use for your webhook. See [https://docs.gitlab.com/ee/user/project/integrations/webhooks.html#secret-token](https://docs.gitlab.com/ee/user/project/integrations/webhooks.html#secret-token "the GitLab documentation") for more information.
 
 5. Create a webhook in GitLab.
-   You can create a webhook in GitLab for your project, group or system. The default url is `<application.tld>/gitlabwebhook` this can be changed in the configuration.
+   You can create a webhook in GitLab for your project, group or system. The default url is `<application.tld>/gitlabwebhook` this can be changed in the [configuration from tjvb/gitlab-webhooks-receiver-for-laravel](https://gitlab.com/tjvb/gitlab-webhooks-receiver-for-laravel#configuration).
    
 6. Optional configure the package.
 

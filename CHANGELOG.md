@@ -5,6 +5,7 @@ All notable changes to `tjvb/gitlab-webhooks-receiver-for-laravel` will be docum
 ## Unreleased
 
 ### Added
+- Add PHP 8.2 support
 - Add infection to level up the test quality
 - Add [Safe php](https://packagist.org/packages/thecodingmachine/safe) as requirement.
 - Breaking: Add the getBody, getEventType, getEventName, getObjectKind, getCreatedAt, store and remove functions to the GitLabHookModel interface.
