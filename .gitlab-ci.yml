@@ -80,7 +80,7 @@ phpstan:
 
 test_lowest:
   extends: .test_base
-  image: registry.gitlab.com/tjvb/phpimages:php80
+  image: registry.gitlab.com/tjvb/phpimages:php81
   script:
     # Install composer
     - rm -f composer.lock
