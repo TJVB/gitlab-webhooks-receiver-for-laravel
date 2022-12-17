@@ -14,6 +14,7 @@ All notable changes to `tjvb/gitlab-webhooks-receiver-for-laravel` will be docum
 
 ### Removed
 - Remove PHP 7.4 support.
+- Remove PHP 8.0 support.
 
 ## 1.2.0 - 2022-02-08
 ### Added
