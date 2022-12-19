@@ -80,36 +80,11 @@ phpstan:
 
 test_lowest:
   extends: .test_base
-  image: registry.gitlab.com/tjvb/phpimages:php80
+  image: registry.gitlab.com/tjvb/phpimages:php81
   script:
     # Install composer
     - rm -f composer.lock
     - composer update --prefer-lowest
-    - vendor/bin/phpunit --coverage-text --colors=never --coverage-cobertura=phpunitresult/cobertura-coverage.xml --log-junit=phpunitresult/junit.xml
-    - sed -i 's~ filename="~ filename="src/~' phpunitresult/cobertura-coverage.xml
-
-
-test_php80_laravel_8:
-  extends: .test_base
-  image: registry.gitlab.com/tjvb/phpimages:php80
-  script:
-    - composer require --dev orchestra/testbench=^6.0
-    - vendor/bin/phpunit --coverage-text --colors=never --coverage-cobertura=phpunitresult/cobertura-coverage.xml --log-junit=phpunitresult/junit.xml
-    - sed -i 's~ filename="~ filename="src/~' phpunitresult/cobertura-coverage.xml
-
-test_php80_laravel_9:
-  extends: .test_base
-  image: registry.gitlab.com/tjvb/phpimages:php80
-  script:
-    - composer require --dev orchestra/testbench=^7.0
-    - vendor/bin/phpunit --coverage-text --colors=never --coverage-cobertura=phpunitresult/cobertura-coverage.xml --log-junit=phpunitresult/junit.xml
-    - sed -i 's~ filename="~ filename="src/~' phpunitresult/cobertura-coverage.xml
-
-test_php81_laravel_8:
-  extends: .test_base
-  image: registry.gitlab.com/tjvb/phpimages:php81
-  script:
-    - composer require --dev orchestra/testbench=^6.0
     - vendor/bin/phpunit --coverage-text --colors=never --coverage-cobertura=phpunitresult/cobertura-coverage.xml --log-junit=phpunitresult/junit.xml
     - sed -i 's~ filename="~ filename="src/~' phpunitresult/cobertura-coverage.xml
 
@@ -118,14 +93,6 @@ test_php81_laravel_9:
   image: registry.gitlab.com/tjvb/phpimages:php81
   script:
     - composer require --dev orchestra/testbench=^7.0
-    - vendor/bin/phpunit --coverage-text --colors=never --coverage-cobertura=phpunitresult/cobertura-coverage.xml --log-junit=phpunitresult/junit.xml
-    - sed -i 's~ filename="~ filename="src/~' phpunitresult/cobertura-coverage.xml
-
-test_php82_laravel_8:
-  extends: .test_base
-  image: registry.gitlab.com/tjvb/phpimages:php82
-  script:
-    - composer require --dev orchestra/testbench=^6.0
     - vendor/bin/phpunit --coverage-text --colors=never --coverage-cobertura=phpunitresult/cobertura-coverage.xml --log-junit=phpunitresult/junit.xml
     - sed -i 's~ filename="~ filename="src/~' phpunitresult/cobertura-coverage.xml
 
