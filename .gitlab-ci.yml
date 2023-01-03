@@ -38,11 +38,10 @@ phpcs:
     - prepare_cache
 
 phpmd:
-  image: phpqa/phpmd
   interruptible: true
   stage: check
   script:
-    - phpmd src/ text phpmd.xml.dist
+    - vendor/bin/phpmd src/ text phpmd.xml.dist
   dependencies: []
   needs: []
 

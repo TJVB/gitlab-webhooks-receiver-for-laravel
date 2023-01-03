@@ -29,6 +29,7 @@
         "fakerphp/faker": "^1.14",
         "infection/infection": "^0.26.10",
         "orchestra/testbench": "^7.0",
+        "phpmd/phpmd": "^2.13",
         "phpstan/phpstan": "^1.4",
         "phpunit/phpunit": "^9.5",
         "squizlabs/php_codesniffer": "^3.5",
@@ -71,6 +72,28 @@
         {
             "type": "github",
             "url": "https://github.com/sponsors/tvbeek/"
+        },
+        {
+            "type": "github",
+            "url": "https://github.com/sponsors/TJVB/"
         }
-    ]
+    ],
+
+    "scripts": {
+        "check-all": [
+            "@format",
+            "@codestyle",
+            "@test-coverage",
+            "@phpstan",
+            "@phpmd",
+            "@infection"
+        ],
+        "codestyle": "@php vendor/bin/phpcs",
+        "format": "@php vendor/bin/phpcbf",
+        "phpmd": "@php vendor/bin/phpmd src/ text phpmd.xml.dist",
+        "phpstan": "@php vendor/bin/phpstan",
+        "test": "@php vendor/bin/phpunit --no-coverage",
+        "test-coverage": "@php vendor/bin/phpunit --coverage-html build/coverage",
+        "infection": "@php vendor/bin/infection"
+    }
 }
