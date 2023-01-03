@@ -42,8 +42,10 @@ phpmd:
   stage: check
   script:
     - vendor/bin/phpmd src/ text phpmd.xml.dist
-  dependencies: []
-  needs: []
+  dependencies:
+    - prepare_cache
+  needs:
+    - prepare_cache
 
 phpstan:
   stage: check
