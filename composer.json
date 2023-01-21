@@ -1,16 +1,15 @@
 {
     "name": "tjvb/gitlab-webhooks-receiver-for-laravel",
-    "type": "library",
     "description": "Receive webhooks from GitLab and store the data in the database.",
+    "license": "MIT",
+    "type": "library",
     "keywords": [
         "tjvb",
         "gitlab",
         "laravel",
         "webhook"
     ],
-    "homepage": "https://gitlab.com/tjvb/gitlab-webhooks-receiver-for-laravel",
     "readme": "README.md",
-    "license": "MIT",
     "authors": [
         {
             "name": "Tobias van Beek",
@@ -18,48 +17,7 @@
             "homepage": "https://tjvb.nl"
         }
     ],
-    "require": {
-        "php": "~8.1.0 || ~8.2.0",
-        "ext-json": "*",
-        "laravel/framework": "^9.0",
-        "nesbot/carbon": "^2.0",
-        "thecodingmachine/safe": "^2.0"
-    },
-    "require-dev": {
-        "fakerphp/faker": "^1.14",
-        "infection/infection": "^0.26.10",
-        "orchestra/testbench": "^7.0",
-        "phpmd/phpmd": "^2.13",
-        "phpstan/phpstan": "^1.4",
-        "phpunit/phpunit": "^9.5",
-        "squizlabs/php_codesniffer": "^3.5",
-        "thecodingmachine/phpstan-safe-rule": "^1.2"
-    },
-    "config": {
-        "sort-packages": true,
-        "allow-plugins": {
-            "infection/extension-installer": true
-        }
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "TJVB\\GitLabWebhooks\\GitLabWebhooksServiceProvider"
-            ]
-        }
-    },
-    "autoload": {
-        "psr-4": {
-            "TJVB\\GitLabWebhooks\\": "src"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "TJVB\\GitLabWebhooks\\Tests\\": "tests/"
-        }
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
+    "homepage": "https://gitlab.com/tjvb/gitlab-webhooks-receiver-for-laravel",
     "support": {
         "issues": "https://gitlab.com/tjvb/gitlab-webhooks-receiver-for-laravel/-/issues",
         "source": "https://gitlab.com/tjvb/gitlab-webhooks-receiver-for-laravel/-/tree/master"
@@ -71,14 +29,55 @@
         },
         {
             "type": "github",
-            "url": "https://github.com/sponsors/tvbeek/"
+            "url": "https://github.com/sponsors/tvbeek"
         },
         {
             "type": "github",
-            "url": "https://github.com/sponsors/TJVB/"
+            "url": "https://github.com/sponsors/TJVB"
         }
     ],
-
+    "require": {
+        "php": "~8.1.0 || ~8.2.0",
+        "ext-json": "*",
+        "laravel/framework": "^9.0 || ^10.0",
+        "nesbot/carbon": "^2.0",
+        "thecodingmachine/safe": "^2.0"
+    },
+    "require-dev": {
+        "fakerphp/faker": "^1.14",
+        "infection/infection": "^0.26.10",
+        "orchestra/testbench": "^7.0 || ^8.0",
+        "phpmd/phpmd": "^2.13",
+        "phpstan/phpstan": "^1.4",
+        "phpunit/phpunit": "^9.5",
+        "squizlabs/php_codesniffer": "^3.5",
+        "thecodingmachine/phpstan-safe-rule": "^1.2"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "TJVB\\GitLabWebhooks\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "TJVB\\GitLabWebhooks\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "infection/extension-installer": true
+        },
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "TJVB\\GitLabWebhooks\\GitLabWebhooksServiceProvider"
+            ]
+        }
+    },
     "scripts": {
         "check-all": [
             "@format",
@@ -90,10 +89,10 @@
         ],
         "codestyle": "@php vendor/bin/phpcs",
         "format": "@php vendor/bin/phpcbf",
+        "infection": "@php vendor/bin/infection",
         "phpmd": "@php vendor/bin/phpmd src/ text phpmd.xml.dist",
         "phpstan": "@php vendor/bin/phpstan",
         "test": "@php vendor/bin/phpunit --no-coverage",
-        "test-coverage": "@php vendor/bin/phpunit --coverage-html build/coverage",
-        "infection": "@php vendor/bin/infection"
+        "test-coverage": "@php vendor/bin/phpunit --coverage-html build/coverage"
     }
 }
