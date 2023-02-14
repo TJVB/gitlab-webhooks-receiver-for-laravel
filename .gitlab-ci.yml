@@ -6,9 +6,11 @@ stages:
   - check # check the codestyles
   - test
 
+default:
+  interruptible: true
+
 prepare_cache:
   stage: prepare
-  interruptible: true
   script:
     # Install composer
     - composer validate
@@ -29,7 +31,6 @@ lint:
 
 phpcs:
   stage: check
-  interruptible: true
   script:
     - vendor/bin/phpcs
   dependencies:
@@ -38,7 +39,6 @@ phpcs:
     - prepare_cache
 
 phpmd:
-  interruptible: true
   stage: check
   script:
     - vendor/bin/phpmd src/ text phpmd.xml.dist
@@ -49,7 +49,6 @@ phpmd:
 
 phpstan:
   stage: check
-  interruptible: true
   script:
     # check for phpstan errors
     - php -d memory_limit=500M vendor/bin/phpstan analyse --error-format=gitlab > phpstan.json
@@ -66,7 +65,6 @@ phpstan:
 # this is a template that we reuse for the different test jobs
 .test_base:
   stage: test
-  interruptible: true
   coverage:  '/^\s*Lines:\s*\d+.\d+\%/'
   artifacts:
     reports:
@@ -89,22 +87,30 @@ test_lowest:
     - vendor/bin/phpunit --coverage-text --colors=never --coverage-cobertura=phpunitresult/cobertura-coverage.xml --log-junit=phpunitresult/junit.xml
     - sed -i 's~ filename="~ filename="src/~' phpunitresult/cobertura-coverage.xml
 
-test_php81_laravel_9:
+
+test:
   extends: .test_base
-  image: registry.gitlab.com/tjvb/phpimages:php81
+  parallel:
+    matrix:
+      - LARAVEL: 9
+        TESTBENCH: 7
+        PHP:
+          - 81
+          - 82
+      - LARAVEL: 10
+        TESTBENCH: 8
+        PHP:
+          - 81
+          - 82
+  image: registry.gitlab.com/tjvb/phpimages:php$PHP
   script:
-    - composer require --dev orchestra/testbench=^7.0
+    - echo "Laravel $LARAVEL"
+    - echo "PHP $PHP"
+    - echo "TESTBENCH $TESTBENCH"
+    - composer require --dev "orchestra/testbench=^$TESTBENCH"
     - vendor/bin/phpunit --coverage-text --colors=never --coverage-cobertura=phpunitresult/cobertura-coverage.xml --log-junit=phpunitresult/junit.xml
     - sed -i 's~ filename="~ filename="src/~' phpunitresult/cobertura-coverage.xml
 
-test_php82_laravel_9:
-  extends: .test_base
-  image: registry.gitlab.com/tjvb/phpimages:php82
-  script:
-    - composer require --dev orchestra/testbench=^7.0
-    - vendor/bin/phpunit --coverage-text --colors=never --coverage-cobertura=phpunitresult/cobertura-coverage.xml --log-junit=phpunitresult/junit.xml
-    - sed -i 's~ filename="~ filename="src/~' phpunitresult/cobertura-coverage.xml
-    
 infection:
   stage: test
   interruptible: true
