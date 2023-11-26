@@ -4,6 +4,8 @@ All notable changes to `tjvb/gitlab-webhooks-receiver-for-laravel` will be docum
 
 ## Unreleased
 
+## 2.2.0 - 2023-11-26
+
 ### Added
 - Add PHP 8.3 support.
 
