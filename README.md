@@ -3,7 +3,7 @@
 [![Latest Stable Version](https://poser.pugx.org/tjvb/gitlab-webhooks-receiver-for-laravel/v)](https://packagist.org/packages/tjvb/gitlab-webhooks-receiver-for-laravel)
 [![Pipeline status](https://gitlab.com/tjvb/gitlab-webhooks-receiver-for-laravel/badges/master/pipeline.svg)](https://gitlab.com/tjvb/gitlab-webhooks-receiver-for-laravel/-/pipelines?page=1&scope=all&ref=master)
 [![Coverage report](https://gitlab.com/tjvb/gitlab-webhooks-receiver-for-laravel/badges/master/coverage.svg)](https://gitlab.com/tjvb/gitlab-webhooks-receiver-for-laravel/-/pipelines?page=1&scope=all&ref=master)
-[![Tested on PHP 8.1 to 8.2](https://img.shields.io/badge/Tested%20on-PHP%208.1%20|%208.2-brightgreen.svg?maxAge=2419200)](https://gitlab.com/tjvb/gitlab-webhooks-receiver-for-laravel/-/pipelines?page=1&scope=all&ref=master)
+[![Tested on PHP 8.1 to 8.3](https://img.shields.io/badge/Tested%20on-PHP%208.1%20|%208.2%20|%208.3-brightgreen.svg?maxAge=2419200)](https://gitlab.com/tjvb/gitlab-webhooks-receiver-for-laravel/-/pipelines?page=1&scope=all&ref=master)
 [![Tested on Laravel 9 to 10](https://img.shields.io/badge/Tested%20on-Laravel%209%20|%2010-brightgreen.svg?maxAge=2419200)](https://gitlab.com/tjvb/gitlab-webhooks-receiver-for-laravel/-/pipelines?page=1&scope=all&ref=master)
 [![Latest Unstable Version](https://poser.pugx.org/tjvb/gitlab-webhooks-receiver-for-laravel/v/unstable)](https://packagist.org/packages/tjvb/gitlab-webhooks-receiver-for-laravel)
 
