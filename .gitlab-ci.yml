@@ -104,6 +104,11 @@ test:
           - 81
           - 82
           - 83
+      - LARAVEL: 11
+        TESTBENCH: 9
+        PHP:
+          - 82
+          - 83
   image: registry.gitlab.com/tjvb/phpimages:php$PHP
   script:
     - echo "Laravel $LARAVEL"
@@ -118,15 +123,21 @@ infection:
   interruptible: true
   script:
     - composer install
+    - vendor/bin/phpunit --migrate-configuration
     - vendor/bin/infection
   artifacts:
     name: "Infection result ${CI_PROJECT_NAME}_${CI_PIPELINE_ID}"
     when: always
     paths:
-      - build/infection/infection.log
       - build/infection/infection-summary.log
-      - build/infection/infection-log.json
       - build/infection/infection-per-mutator.md
+      - build/infection/infection.log
+      - build/infection/infection-log-gitlab.json
+      - build/infection/infection-log.json
+      - build/infection/infection-log.html
+    reports:
+      codequality:
+        - build/infection/infection-log-gitlab.json
     expire_in: 1 day
     expose_as: Infection log
   dependencies:

@@ -23,11 +23,6 @@ class GitLabHook extends Model implements GitLabHookModel
         'system_hook' => 'boolean',
     ];
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var string[]
-     */
     protected $fillable = [
         'object_kind',
         'event_type',
