@@ -45,7 +45,7 @@
     },
     "require-dev": {
         "fakerphp/faker": "^1.14",
-        "infection/infection": "^0.26.10",
+        "infection/infection": "^0.26.10 || ^0.27.0",
         "orchestra/testbench": "^7.0 || ^8.0 || ^9.0",
         "phpmd/phpmd": "^2.13",
         "phpstan/phpstan": "^1.4",
