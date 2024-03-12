@@ -129,7 +129,12 @@ infection:
     name: "Infection result ${CI_PROJECT_NAME}_${CI_PIPELINE_ID}"
     when: always
     paths:
-      - build/infection/*
+      - build/infection/infection-summary.log
+      - build/infection/infection-per-mutator.md
+      - build/infection/infection.log
+      - build/infection/infection-log-gitlab.json
+      - build/infection/infection-log.json
+      - build/infection/infection-log.html
     reports:
       codequality:
         - build/infection/infection-log-gitlab.json
