@@ -17,7 +17,7 @@ class EnsureSecretTokenIsValid
         $this->config = $config;
     }
 
-    public function handle($request, Closure $next)
+    public function handle(mixed $request, Closure $next): mixed
     {
         if (!$this->tokenIsValid($request)) {
             return new JsonResponse(['message' => 'invalid token'], JsonResponse::HTTP_FORBIDDEN);
@@ -26,17 +26,20 @@ class EnsureSecretTokenIsValid
         return $next($request);
     }
 
-    private function tokenIsValid($request): bool
+    private function tokenIsValid(mixed $request): bool
     {
-        if (!method_exists($request, 'header')) {
+        if (!is_object($request) ||  !method_exists($request, 'header')) {
             // it is possible that another middleware changed the request, we don't want to crash but give a 403
             return false;
         }
         $token = $request->header('X-Gitlab-Token');
-        if (empty($token)) {
+        if (!is_string($token)) {
             return false;
         }
         $secrets = $this->config->get('gitlab-webhooks-receiver.valid_secrets', []);
+        if (!is_array($secrets)) {
+            return false;
+        }
         return in_array($token, $secrets, true);
     }
 }
