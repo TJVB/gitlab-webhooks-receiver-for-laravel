@@ -29,6 +29,7 @@ class WebhookDataStoringTest extends TestCase
         $request->content = $data;
 
         // run
+        /** @var StoreInComingWebhookRequestData $storing */
         $storing = $this->app->make(StoreInComingWebhookRequestData::class);
         $storing->handle($request);
 
@@ -49,6 +50,7 @@ class WebhookDataStoringTest extends TestCase
 
         $this->expectException(InvalidInputException::class);
         // run
+        /** @var StoreInComingWebhookRequestData $storing */
         $storing = $this->app->make(StoreInComingWebhookRequestData::class);
         $storing->handle($request);
 
@@ -74,6 +76,7 @@ class WebhookDataStoringTest extends TestCase
         $systemRequest->headers['X-Gitlab-Event'] = 'System Hook';
 
         // run
+        /** @var StoreInComingWebhookRequestData $storing */
         $storing = $this->app->make(StoreInComingWebhookRequestData::class);
         $storing->handle($request);
         $storing->handle($systemRequest);
@@ -102,6 +105,7 @@ class WebhookDataStoringTest extends TestCase
         $request->content = $data;
 
         // run
+        /** @var StoreInComingWebhookRequestData $storing */
         $storing = $this->app->make(StoreInComingWebhookRequestData::class);
         $storing->handle($request);
 
@@ -124,6 +128,7 @@ class WebhookDataStoringTest extends TestCase
         $request->content = $data;
 
         // run
+        /** @var StoreInComingWebhookRequestData $storing */
         $storing = $this->app->make(StoreInComingWebhookRequestData::class);
         $storing->handle($request);
 

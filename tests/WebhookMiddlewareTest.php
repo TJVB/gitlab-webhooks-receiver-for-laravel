@@ -19,6 +19,7 @@ class WebhookMiddlewareTest extends TestCase
     public function weHandleAValidRequest(): void
     {
         // setup / mock
+        /** @var Repository $config */
         $config = $this->app->make(Repository::class);
         $config->set('gitlab-webhooks-receiver.valid_secrets', ['valid']);
         $middleware = new EnsureSecretTokenIsValid($config);
@@ -39,6 +40,7 @@ class WebhookMiddlewareTest extends TestCase
     public function weHandleARequestWithoutToken(): void
     {
         // setup / mock
+        /** @var Repository $config */
         $config = $this->app->make(Repository::class);
         $middleware = new EnsureSecretTokenIsValid($config);
         $request = new WebHookRequest();
@@ -49,7 +51,7 @@ class WebhookMiddlewareTest extends TestCase
         // verify/assert
         $this->assertInstanceOf(JsonResponse::class, $result);
         $this->assertEquals(JsonResponse::HTTP_FORBIDDEN, $result->status());
-        $this->assertStringContainsString('invalid token', $result->getContent());
+        $this->assertStringContainsString('invalid token', (string) $result->getContent());
     }
 
     /**
@@ -58,6 +60,7 @@ class WebhookMiddlewareTest extends TestCase
     public function weHandleAnInvalidToken(): void
     {
         // setup / mock
+        /** @var Repository $config */
         $config = $this->app->make(Repository::class);
         $config->set('gitlab-webhooks-receiver.valid_secrets', ['valid']);
         $middleware = new EnsureSecretTokenIsValid($config);
@@ -70,7 +73,7 @@ class WebhookMiddlewareTest extends TestCase
         // verify/assert
         $this->assertInstanceOf(JsonResponse::class, $result);
         $this->assertEquals(JsonResponse::HTTP_FORBIDDEN, $result->status());
-        $this->assertStringContainsString('invalid token', $result->getContent());
+        $this->assertStringContainsString('invalid token', (string) $result->getContent());
     }
 
     /**
@@ -79,6 +82,7 @@ class WebhookMiddlewareTest extends TestCase
     public function weHandleARequestThatDoesntHaveTheHeaderFunction(): void
     {
         // setup / mock
+        /** @var Repository $config */
         $config = $this->app->make(Repository::class);
         $config->set('gitlab-webhooks-receiver.valid_secrets', ['valid']);
         $middleware = new EnsureSecretTokenIsValid($config);
@@ -90,7 +94,7 @@ class WebhookMiddlewareTest extends TestCase
         // verify/assert
         $this->assertInstanceOf(JsonResponse::class, $result);
         $this->assertEquals(JsonResponse::HTTP_FORBIDDEN, $result->status());
-        $this->assertStringContainsString('invalid token', $result->getContent());
+        $this->assertStringContainsString('invalid token', (string) $result->getContent());
     }
 
     private function getNextClosure(): Closure

@@ -9,11 +9,12 @@ use TJVB\GitLabWebhooks\Contracts\Requests\GitLabWebhookRequest;
 
 class WebHookRequest implements GitLabWebhookRequest
 {
-    public $content = null;
+    public string $content = '';
 
+    /** @var array<string, string> */
     public array $headers = [];
 
-    public function getContent()
+    public function getContent(bool $asResource = false)
     {
         if (is_callable($this->content)) {
             return call_user_func($this->content);
@@ -26,6 +27,6 @@ class WebHookRequest implements GitLabWebhookRequest
         if ($key === null) {
             return $this->headers;
         }
-        return Arr::get($this->headers, $key, $default);
+        return $this->headers[$key] ?? $default;
     }
 }

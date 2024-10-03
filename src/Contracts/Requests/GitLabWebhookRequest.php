@@ -6,14 +6,16 @@ namespace TJVB\GitLabWebhooks\Contracts\Requests;
 
 interface GitLabWebhookRequest
 {
-    public function getContent();
+    /**
+     * @return ($asResource is true ? resource : string)
+     */
+    public function getContent(bool $asResource = false);
 
     /**
-     * Retrieve a header from the request.
      *
-     * @param  string|null  $key
-     * @param  string|array|null  $default
-     * @return string|array|null
+     * @param string|null $key
+     * @param string|array<string|null>|null $default
+     * @return string|array<string|null>|null
      */
     public function header($key = null, $default = null);
 }

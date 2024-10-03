@@ -4,11 +4,20 @@ declare(strict_types=1);
 
 namespace TJVB\GitLabWebhooks\Models;
 
+use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use TJVB\GitLabWebhooks\Contracts\Models\GitLabHookModel;
 
+/**
+ * @property bool $system_hook
+ * @property array<mixed> $body
+ * @property string $event_type
+ * @property string $object_kind
+ * @property string $event_name
+ * @property Carbon $created_at
+ */
 class GitLabHook extends Model implements GitLabHookModel
 {
     use SoftDeletes;
@@ -16,7 +25,7 @@ class GitLabHook extends Model implements GitLabHookModel
     /**
      * The attributes that should be cast.
      *
-     * @var array
+     * @var array<string,string>
      */
     protected $casts = [
         'body' => 'array',
@@ -33,27 +42,27 @@ class GitLabHook extends Model implements GitLabHookModel
 
     public function isSystemHook(): bool
     {
-        return $this->getAttribute('system_hook');
+        return $this->system_hook;
     }
 
     public function getBody(): array
     {
-        return $this->getAttribute('body');
+        return $this->body;
     }
 
     public function getEventType(): string
     {
-        return $this->getAttribute('event_type');
+        return $this->event_type;
     }
 
     public function getEventName(): string
     {
-        return $this->getAttribute('event_name');
+        return $this->event_name;
     }
 
     public function getObjectKind(): string
     {
-        return $this->getAttribute('object_kind');
+        return $this->object_kind;
     }
 
     public function store(
@@ -84,6 +93,6 @@ class GitLabHook extends Model implements GitLabHookModel
 
     public function getCreatedAt(): CarbonImmutable
     {
-        return $this->getAttribute('created_at')->toImmutable();
+        return $this->created_at->toImmutable();
     }
 }

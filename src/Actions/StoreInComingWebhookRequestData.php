@@ -31,17 +31,22 @@ class StoreInComingWebhookRequestData implements InComingWebhookRequestStoring
     {
         try {
             $content = $request->getContent();
+            /** @var array<string> $body */
             $body = json_decode($content, true);
         } catch (JsonException $jsonException) {
             throw InvalidInputException::fromJsonException($jsonException);
         }
         $gitLabHookModel = $this->createHookModel($body, $request);
+        /** @var GitLabHookStored $event */
         $event = $this->container->make(GitLabHookStored::class, [
             'model' => $gitLabHookModel
         ]);
         $this->dispatcher->dispatch($event);
     }
 
+    /**
+     * @param array<string> $body
+     */
     private function createHookModel(array $body, GitLabWebhookRequest $request): GitLabHookModel
     {
         /**
@@ -50,9 +55,9 @@ class StoreInComingWebhookRequestData implements InComingWebhookRequestStoring
         $model = $this->container->make(GitLabHookModel::class);
         return $model->store(
             $body,
-            Arr::get($body, 'event_name', ''),
-            Arr::get($body, 'event_type', ''),
-            Arr::get($body, 'object_kind', ''),
+            $body['event_name'] ?? '',
+            $body['event_type'] ?? '',
+            $body['object_kind'] ?? '',
             $request->header('X-Gitlab-Event') === 'System Hook'
         );
     }

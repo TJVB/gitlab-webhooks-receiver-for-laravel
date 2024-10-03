@@ -1,0 +1,31 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Parameter \\#2 \\$concrete of method Illuminate\\\\Contracts\\\\Container\\\\Container\\:\\:bind\\(\\) expects Closure\\|string\\|null, mixed given\\.$#"
+			count: 4
+			path: src/GitLabWebhooksServiceProvider.php
+
+		-
+			message: "#^Cannot call method set\\(\\) on mixed\\.$#"
+			count: 2
+			path: tests/TestCase.php
+
+		-
+			message: "#^Cannot call method make\\(\\) on Illuminate\\\\Foundation\\\\Application\\|null\\.$#"
+			count: 5
+			path: tests/WebhookDataStoringTest.php
+
+		-
+			message: "#^Cannot call method make\\(\\) on Illuminate\\\\Foundation\\\\Application\\|null\\.$#"
+			count: 4
+			path: tests/WebhookMiddlewareTest.php
+
+		-
+			message: "#^Cannot call method instance\\(\\) on Illuminate\\\\Foundation\\\\Application\\|null\\.$#"
+			count: 3
+			path: tests/WebhookReceiverTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$uri of method Orchestra\\\\Testbench\\\\TestCase\\:\\:post\\(\\) expects string, mixed given\\.$#"
+			count: 3
+			path: tests/WebhookReceiverTest.php

@@ -14,6 +14,9 @@ class GitLabWebhookRequest extends FormRequest implements GitLabWebhookRequestCo
         return true;
     }
 
+    /**
+     * @return array<string>
+     */
     public function rules(): array
     {
         return [];

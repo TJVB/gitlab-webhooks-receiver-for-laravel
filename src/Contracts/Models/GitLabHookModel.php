@@ -10,6 +10,9 @@ interface GitLabHookModel
 {
     public function isSystemHook(): bool;
 
+    /**
+     * @return array<mixed>
+     */
     public function getBody(): array;
 
     public function getEventType(): string;
@@ -20,6 +23,9 @@ interface GitLabHookModel
 
     public function getCreatedAt(): CarbonImmutable;
 
+    /**
+     * @param array<mixed> $body
+     */
     public function store(
         array $body,
         string $eventName,

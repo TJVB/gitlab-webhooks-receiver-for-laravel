@@ -9,7 +9,7 @@ use TJVB\GitLabWebhooks\Contracts\Requests\GitLabWebhookRequest;
 
 class WebHookStoring implements InComingWebhookRequestStoring
 {
-    public $behaviour = null;
+    public mixed $behaviour = null;
 
     /**
      * @inheritDoc
