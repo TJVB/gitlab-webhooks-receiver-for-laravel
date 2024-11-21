@@ -28,7 +28,7 @@ class EnsureSecretTokenIsValid
 
     private function tokenIsValid(mixed $request): bool
     {
-        if (!is_object($request) ||  !method_exists($request, 'header')) {
+        if (!is_object($request) || !method_exists($request, 'header')) {
             // it is possible that another middleware changed the request, we don't want to crash but give a 403
             return false;
         }

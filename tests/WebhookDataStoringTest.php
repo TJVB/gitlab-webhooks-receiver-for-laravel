@@ -10,7 +10,6 @@ use TJVB\GitLabWebhooks\Actions\StoreInComingWebhookRequestData;
 use TJVB\GitLabWebhooks\Events\HookStored;
 use TJVB\GitLabWebhooks\Exceptions\InvalidInputException;
 use TJVB\GitLabWebhooks\Tests\Fixtures\WebHookRequest;
-
 use function Safe\json_encode;
 
 class WebhookDataStoringTest extends TestCase
@@ -83,11 +82,11 @@ class WebhookDataStoringTest extends TestCase
 
         // verify/assert
         $this->assertDatabaseHas('git_lab_hooks', ['body' => $data, 'system_hook' => false]);
-        Event::assertDispatched(function (HookStored $hookStored) {
+        Event::assertDispatched(static function (HookStored $hookStored) {
             return $hookStored->model->isSystemHook() === false;
         });
         $this->assertDatabaseHas('git_lab_hooks', ['body' => $systemData, 'system_hook' => true]);
-        Event::assertDispatched(function (HookStored $hookStored) {
+        Event::assertDispatched(static function (HookStored $hookStored) {
             return $hookStored->model->isSystemHook() === true;
         });
     }

@@ -31,7 +31,7 @@ class WebhookMiddlewareTest extends TestCase
 
         // verify/assert
         $this->assertNotInstanceOf(JsonResponse::class, $result);
-        $this->assertEquals(true, $result);
+        $this->assertTrue($result);
     }
 
     /**

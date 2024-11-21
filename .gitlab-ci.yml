@@ -29,24 +29,6 @@ lint:
   dependencies: []
   needs: []
 
-phpcs:
-  stage: check
-  script:
-    - vendor/bin/phpcs
-  dependencies:
-    - prepare_cache
-  needs:
-    - prepare_cache
-
-phpmd:
-  stage: check
-  script:
-    - vendor/bin/phpmd src/ text phpmd.xml.dist
-  dependencies:
-    - prepare_cache
-  needs:
-    - prepare_cache
-
 phpstan:
   stage: check
   script:
@@ -60,7 +42,65 @@ phpstan:
   artifacts:
     paths:
       - phpstan.json
+    reports:
+      codequality: phpstan.json
     when: always
+
+phpmd:
+  stage: check
+  script:
+    - composer phpmd
+  dependencies:
+    - prepare_cache
+  needs:
+    - prepare_cache
+
+code-style:
+  stage: check
+  script:
+    - composer cs
+  dependencies:
+    - prepare_cache
+  needs:
+    - prepare_cache
+
+# We check the content with vale
+vale:
+  image:
+    name: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/jdkato/vale
+    entrypoint: [""]
+  stage: check
+  script:
+    - /bin/vale --config=tools/vale/.vale.ini README.md CONTRIBUTING.md
+  needs: []
+  dependencies: []
+
+infection:
+  stage: test
+  interruptible: true
+  script:
+    - composer install
+    - vendor/bin/phpunit --migrate-configuration
+    - vendor/bin/infection
+  artifacts:
+    name: "Infection result ${CI_PROJECT_NAME}_${CI_PIPELINE_ID}"
+    when: always
+    paths:
+      - build/infection/infection-summary.log
+      - build/infection/infection-per-mutator.md
+      - build/infection/infection.log
+      - build/infection/infection-log-gitlab.json
+      - build/infection/infection-log.json
+      - build/infection/infection-log.html
+    reports:
+      codequality:
+        - build/infection/infection-log-gitlab.json
+    expire_in: 1 day
+    expose_as: Infection log
+  dependencies:
+    - prepare_cache
+  needs:
+    - prepare_cache
 
 # this is a template that we reuse for the different test jobs
 .test_base:
@@ -86,7 +126,6 @@ test_lowest:
     - composer update --prefer-lowest
     - vendor/bin/phpunit --coverage-text --colors=never --coverage-cobertura=phpunitresult/cobertura-coverage.xml --log-junit=phpunitresult/junit.xml
     - sed -i 's~ filename="~ filename="src/~' phpunitresult/cobertura-coverage.xml
-
 
 test:
   extends: .test_base
@@ -118,29 +157,3 @@ test:
     - vendor/bin/phpunit --coverage-text --colors=never --coverage-cobertura=phpunitresult/cobertura-coverage.xml --log-junit=phpunitresult/junit.xml
     - sed -i 's~ filename="~ filename="src/~' phpunitresult/cobertura-coverage.xml
 
-infection:
-  stage: test
-  interruptible: true
-  script:
-    - composer install
-    - vendor/bin/phpunit --migrate-configuration
-    - vendor/bin/infection
-  artifacts:
-    name: "Infection result ${CI_PROJECT_NAME}_${CI_PIPELINE_ID}"
-    when: always
-    paths:
-      - build/infection/infection-summary.log
-      - build/infection/infection-per-mutator.md
-      - build/infection/infection.log
-      - build/infection/infection-log-gitlab.json
-      - build/infection/infection-log.json
-      - build/infection/infection-log.html
-    reports:
-      codequality:
-        - build/infection/infection-log-gitlab.json
-    expire_in: 1 day
-    expose_as: Infection log
-  dependencies:
-    - prepare_cache
-  needs:
-    - prepare_cache
