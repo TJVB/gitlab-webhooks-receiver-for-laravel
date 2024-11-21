@@ -63,7 +63,7 @@ The default configuration validates the `X-Gitlab-Token` in the header of the we
 We (try to) document all the changes in [CHANGELOG](CHANGELOG.md) so read it for more information.
 
 ## Contributing
-You are very welcome to contribute, read about it in [CONTRIBUTING](CONTRIBUTING.md)
+You are welcome to contribute, read about it in [CONTRIBUTING](CONTRIBUTING.md)
 
 ## Security
 If you discover any security related issues, please email info@tjvb.nl instead of using the issue tracker.
@@ -77,7 +77,7 @@ As described [here](https://docs.gitlab.com/ee/user/project/integrations/webhook
 On the GitLab pages with the webhook settings it is possible to test the webhook, use it to verify that everything works as suspected.
 
 ### Cleanup your hooks
-If you don't need the data saved in the webhook it can be a good idea to periodic remove the old data. Depending on the kind of hooks the body can be very big. This can be done on the end of your event listener or with a package like [spatie/laravel-model-cleanup](https://github.com/spatie/laravel-model-cleanup).
+If you don't need the data saved in the webhook it can be a good idea to periodic remove the old data. Depending on the kind of hooks the body can be big. This can be done on the end of your event listener or with a package like [spatie/laravel-model-cleanup](https://github.com/spatie/laravel-model-cleanup).
 
 ## Credits
 
