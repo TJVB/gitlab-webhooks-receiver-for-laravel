@@ -9,13 +9,14 @@ use TJVB\GitLabWebhooks\Contracts\Actions\InComingWebhookRequestStoring;
 use TJVB\GitLabWebhooks\Contracts\Events\GitLabHookStored;
 use TJVB\GitLabWebhooks\Contracts\Models\GitLabHookModel;
 use TJVB\GitLabWebhooks\Contracts\Requests\GitLabWebhookRequest;
+use function config_path;
 
 class GitLabWebhooksServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
         $this->publishes([
-            __DIR__ . '/../config/gitlab-webhooks-receiver.php' => \config_path('gitlab-webhooks-receiver.php'),
+            __DIR__ . '/../config/gitlab-webhooks-receiver.php' => config_path('gitlab-webhooks-receiver.php'),
         ], 'config');
 
         $this->publishes([

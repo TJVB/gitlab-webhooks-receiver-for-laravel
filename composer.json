@@ -45,6 +45,7 @@
     },
     "require-dev": {
         "fakerphp/faker": "^1.14",
+        "friendsofphp/php-cs-fixer": "^3.64",
         "infection/infection": "^0.26.10 || ^0.27.0",
         "orchestra/testbench": "^7.0 || ^8.0 || ^9.0",
         "phpmd/phpmd": "^2.13",
@@ -52,7 +53,9 @@
         "phpstan/phpstan": "^1.11",
         "phpstan/phpstan-strict-rules": "^1.6",
         "phpunit/phpunit": "^9.5 || ^10.0",
+        "slevomat/coding-standard": "^8.15",
         "squizlabs/php_codesniffer": "^3.5",
+        "symplify/easy-coding-standard": "^12.3",
         "thecodingmachine/phpstan-safe-rule": "^1.2"
     },
     "minimum-stability": "dev",
@@ -69,6 +72,7 @@
     },
     "config": {
         "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true,
             "infection/extension-installer": true,
             "phpstan/extension-installer": true
         },
@@ -82,20 +86,35 @@
         }
     },
     "scripts": {
-        "check-all": [
-            "@format",
-            "@codestyle",
-            "@test-coverage",
+        "analyse": [
             "@phpstan",
-            "@phpmd",
+            "@phpmd"
+        ],
+        "analyze": "@analyse",
+        "check": [
+            "@cs-fix",
+            "@test-coverage",
+            "@analyse",
             "@infection"
         ],
-        "codestyle": "@php vendor/bin/phpcs",
-        "format": "@php vendor/bin/phpcbf",
-        "infection": "@php vendor/bin/infection",
-        "phpmd": "@php vendor/bin/phpmd src/ text phpmd.xml.dist",
-        "phpstan": "@php vendor/bin/phpstan",
-        "test": "@php vendor/bin/phpunit --no-coverage",
-        "test-coverage": "@php vendor/bin/phpunit --coverage-html build/coverage"
+        "cs": "vendor/bin/ecs",
+        "cs-fix": "vendor/bin/ecs --fix",
+        "infection": "vendor/bin/infection",
+        "phpmd": "vendor/bin/phpmd src/ text phpmd.xml.dist",
+        "phpstan": "vendor/bin/phpstan",
+        "test": "vendor/bin/phpunit --no-coverage",
+        "test-coverage": "vendor/bin/phpunit --coverage-html build/coverage"
+    },
+    "scripts-descriptions": {
+        "analyse": "Run the analyse steps (PHPStan and PHPMD)",
+        "analyze": "See analyse",
+        "check": "Runs @analyse, @cs-fix, @test-coverage and @infection.",
+        "cs": "Check the codestyle with ecs.",
+        "cs-fix": "Check the codestyle with ecs and if possible fix the found issues.",
+        "infection": "Run infection.",
+        "phpmd": "Analyse the code with PHPMD",
+        "phpstan": "Analyse the code with PHPStan.",
+        "test": "Run the PHPUnit tests without coverage.",
+        "test-coverage": "Run the PHPUnit tests with coverage."
     }
 }

@@ -12,7 +12,7 @@
 [![Laravel Version Require](https://poser.pugx.org/tjvb/gitlab-webhooks-receiver-for-laravel/require/laravel/framework)](https://packagist.org/packages/tjvb/gitlab-webhooks-receiver-for-laravel)
 [![PHPMD](https://img.shields.io/badge/PHPMD-checked-brightgreen.svg)](https://gitlab.com/tjvb/gitlab-webhooks-receiver-for-laravel/-/blob/master/phpmd.xml.dist)
 [![PHPStan](https://img.shields.io/badge/PHPStan-checked-brightgreen.svg)](https://gitlab.com/tjvb/gitlab-webhooks-receiver-for-laravel/-/blob/master/phpstan.neon.dist)
-[![PHPCS](https://img.shields.io/badge/PHPCS-PSR12-brightgreen.svg)](https://gitlab.com/tjvb/gitlab-webhooks-receiver-for-laravel/-/blob/master/phpcs.xml.dist)
+[![ECS](https://img.shields.io/badge/ECS-PSR12-brightgreen.svg)](https://gitlab.com/tjvb/gitlab-webhooks-receiver-for-laravel/-/blob/master/ecs.php)
 
 [![License](https://poser.pugx.org/tjvb/gitlab-webhooks-receiver-for-laravel/license)](https://packagist.org/packages/tjvb/gitlab-webhooks-receiver-for-laravel)
 

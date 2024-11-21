@@ -8,7 +8,6 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\WithFaker;
 use TJVB\GitLabWebhooks\Contracts\Models\GitLabHookModel;
 use TJVB\GitLabWebhooks\Models\GitLabHook;
-
 use function Safe\json_encode;
 
 class WebhookModelTest extends TestCase
@@ -29,6 +28,7 @@ class WebhookModelTest extends TestCase
         // verify/assert
         $this->assertInstanceOf(GitLabHookModel::class, $gitlabHook);
     }
+
     /**
      * @test
      */
