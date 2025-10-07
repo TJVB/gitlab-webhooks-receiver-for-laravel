@@ -67,7 +67,7 @@ code-style:
 # We check the content with vale
 vale:
   image:
-    name: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/jdkato/vale
+    name: registry.gitlab.com/tjvb/tools-images/vale
     entrypoint: [""]
   stage: check
   script:
@@ -149,12 +149,19 @@ test:
           - 82
           - 83
           - 84
+      - LARAVEL: 12
+        TESTBENCH: 10
+        PHP:
+          - 82
+          - 83
+          - 84
   image: registry.gitlab.com/tjvb/phpimages:php$PHP
   script:
     - echo "Laravel $LARAVEL"
     - echo "PHP $PHP"
     - echo "TESTBENCH $TESTBENCH"
     - composer require --dev "orchestra/testbench=^$TESTBENCH"
+    - vendor/bin/phpunit --migrate-configuration || true
     - XDEBUG_MODE=coverage vendor/bin/phpunit --coverage-text --colors=never --coverage-cobertura=phpunitresult/cobertura-coverage.xml --log-junit=phpunitresult/junit.xml
     - sed -i 's~ filename="~ filename="src/~' phpunitresult/cobertura-coverage.xml
 
