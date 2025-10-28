@@ -27,7 +27,7 @@ class WebhookReceiverTest extends TestCase
         $this->app->instance(InComingWebhookRequestStoring::class, $storing);
 
         // run
-        $response = $this->post(config('gitlab-webhooks-receiver.url', '/gitlabwebhook'), ['']);
+        $response = $this->postJson(config('gitlab-webhooks-receiver.url', '/gitlabwebhook'), ['']);
 
         // verify/assert
         $response->assertCreated();
@@ -48,7 +48,7 @@ class WebhookReceiverTest extends TestCase
         $this->app->instance(InComingWebhookRequestStoring::class, $storing);
 
         // run
-        $response = $this->post(config('gitlab-webhooks-receiver.url', '/gitlabwebhook'), ['invalidjson']);
+        $response = $this->postJson(config('gitlab-webhooks-receiver.url', '/gitlabwebhook'), ['invalidjson']);
 
         // verify/assert
         $response->assertStatus(Response::HTTP_BAD_REQUEST);
@@ -70,9 +70,10 @@ class WebhookReceiverTest extends TestCase
         $this->app->instance(InComingWebhookRequestStoring::class, $storing);
 
         // run
-        $response = $this->post(config('gitlab-webhooks-receiver.url', '/gitlabwebhook'), ['']);
+        $response = $this->postJson(config('gitlab-webhooks-receiver.url', '/gitlabwebhook'), ['']);
 
         // verify/assert
         $response->assertStatus(Response::HTTP_INTERNAL_SERVER_ERROR);
+        $response->assertSee('Failed to store webhook data');
     }
 }

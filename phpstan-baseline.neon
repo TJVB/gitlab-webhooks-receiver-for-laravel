@@ -17,7 +17,7 @@ parameters:
 
 		-
 			message: "#^Cannot call method make\\(\\) on Illuminate\\\\Foundation\\\\Application\\|null\\.$#"
-			count: 4
+			count: 5
 			path: tests/WebhookMiddlewareTest.php
 
 		-
@@ -26,6 +26,6 @@ parameters:
 			path: tests/WebhookReceiverTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$uri of method Orchestra\\\\Testbench\\\\TestCase\\:\\:post\\(\\) expects string, mixed given\\.$#"
+			message: "#^Parameter \\#1 \\$uri of method Orchestra\\\\Testbench\\\\TestCase\\:\\:postJson\\(\\) expects string, mixed given\\.$#"
 			count: 3
 			path: tests/WebhookReceiverTest.php

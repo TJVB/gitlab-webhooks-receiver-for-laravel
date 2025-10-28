@@ -97,6 +97,28 @@ class WebhookMiddlewareTest extends TestCase
         $this->assertStringContainsString('invalid token', (string) $result->getContent());
     }
 
+    /**
+     * @test
+     */
+    public function weDoNotPassAnInvalidSecretsConfig(): void
+    {
+        // setup / mock
+        /** @var Repository $config */
+        $config = $this->app->make(Repository::class);
+        $config->set('gitlab-webhooks-receiver.valid_secrets', 'not-an-array');
+        $middleware = new EnsureSecretTokenIsValid($config);
+        $request = new WebHookRequest();
+        $request->headers['X-Gitlab-Token'] = 'valid';
+
+        // run
+        $result = $middleware->handle($request, $this->getNextClosure());
+
+        // verify/assert
+        $this->assertInstanceOf(JsonResponse::class, $result);
+        $this->assertEquals(JsonResponse::HTTP_FORBIDDEN, $result->status());
+        $this->assertStringContainsString('invalid token', (string) $result->getContent());
+    }
+
     private function getNextClosure(): Closure
     {
         return static function () {
