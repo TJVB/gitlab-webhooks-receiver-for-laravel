@@ -6,6 +6,7 @@ namespace TJVB\GitLabWebhooks\Tests;
 
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\WithFaker;
+use PHPUnit\Framework\Attributes\Test;
 use TJVB\GitLabWebhooks\Contracts\Models\GitLabHookModel;
 use TJVB\GitLabWebhooks\Models\GitLabHook;
 use function Safe\json_encode;
@@ -58,5 +59,21 @@ class WebhookModelTest extends TestCase
             'object_kind' => $objectKind,
             'system_hook' => $systemHook,
         ]);
+    }
+
+    #[Test]
+    public function weCanRemoveTheModel(): void
+    {
+        // setup / mock
+
+        $gitlabHook = new GitLabHook();
+        $gitlabHook->body = ['test' => 'result'];
+        $gitlabHook->save();
+
+        // run
+        $gitlabHook->remove();
+
+        // verify/assert
+        $this->assertSoftDeleted($gitlabHook);
     }
 }
