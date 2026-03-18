@@ -155,6 +155,7 @@ test:
           - 82
           - 83
           - 84
+          - 85
   image: registry.gitlab.com/tjvb/phpimages:php$PHP
   script:
     - echo "Laravel $LARAVEL"
