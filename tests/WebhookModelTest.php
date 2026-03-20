@@ -16,6 +16,9 @@ class WebhookModelTest extends TestCase
     use DatabaseMigrations;
     use WithFaker;
 
+    /**
+     * @test
+     */
     #[Test]
     public function weImplementTheContract(): void
     {
@@ -28,6 +31,9 @@ class WebhookModelTest extends TestCase
         $this->assertInstanceOf(GitLabHookModel::class, $gitlabHook);
     }
 
+    /**
+     * @test
+     */
     #[Test]
     public function weCanStoreTheModel(): void
     {
@@ -57,6 +63,9 @@ class WebhookModelTest extends TestCase
         ]);
     }
 
+    /**
+     * @test
+     */
     #[Test]
     public function weCanRemoveTheModel(): void
     {

@@ -17,6 +17,9 @@ class WebhookDataStoringTest extends TestCase
 {
     use DatabaseMigrations;
 
+    /**
+     * @test
+     */
     #[Test]
     public function weStoreTheWebhookData(): void
     {
@@ -36,6 +39,9 @@ class WebhookDataStoringTest extends TestCase
         Event::assertDispatched(HookStored::class);
     }
 
+    /**
+     * @test
+     */
     #[Test]
     public function weGetAnExceptionIfWeHaveInvalidJson(): void
     {
@@ -54,6 +60,9 @@ class WebhookDataStoringTest extends TestCase
         Event::assertNotDispatched(HookStored::class);
     }
 
+    /**
+     * @test
+     */
     #[Test]
     public function weSeeTheDifferenceBetweenAnSystemHookAndNormalHook(): void
     {
@@ -86,6 +95,9 @@ class WebhookDataStoringTest extends TestCase
         });
     }
 
+    /**
+     * @test
+     */
     #[Test]
     public function weStoreTheObjectKind(): void
     {
@@ -106,6 +118,9 @@ class WebhookDataStoringTest extends TestCase
         Event::assertDispatched(HookStored::class);
     }
 
+    /**
+     * @test
+     */
     #[Test]
     public function weStoreTheEventData(): void
     {

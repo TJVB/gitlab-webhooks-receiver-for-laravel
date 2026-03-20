@@ -14,6 +14,9 @@ use TJVB\GitLabWebhooks\Tests\Fixtures\WebHookRequest;
 
 class WebhookMiddlewareTest extends TestCase
 {
+    /**
+     * @test
+     */
     #[Test]
     public function weHandleAValidRequest(): void
     {
@@ -33,6 +36,9 @@ class WebhookMiddlewareTest extends TestCase
         $this->assertTrue($result);
     }
 
+    /**
+     * @test
+     */
     #[Test]
     public function weHandleARequestWithoutToken(): void
     {
@@ -51,6 +57,9 @@ class WebhookMiddlewareTest extends TestCase
         $this->assertStringContainsString('invalid token', (string) $result->getContent());
     }
 
+    /**
+     * @test
+     */
     #[Test]
     public function weHandleAnInvalidToken(): void
     {
@@ -71,6 +80,9 @@ class WebhookMiddlewareTest extends TestCase
         $this->assertStringContainsString('invalid token', (string) $result->getContent());
     }
 
+    /**
+     * @test
+     */
     #[Test]
     public function weHandleARequestThatDoesntHaveTheHeaderFunction(): void
     {
@@ -90,6 +102,9 @@ class WebhookMiddlewareTest extends TestCase
         $this->assertStringContainsString('invalid token', (string) $result->getContent());
     }
 
+    /**
+     * @test
+     */
     #[Test]
     public function weDoNotPassAnInvalidSecretsConfig(): void
     {

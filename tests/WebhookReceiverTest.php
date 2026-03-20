@@ -16,6 +16,9 @@ class WebhookReceiverTest extends TestCase
 {
     use DatabaseMigrations;
 
+    /**
+     * @test
+     */
     #[Test]
     public function weCanStoreAValidRequest(): void
     {
@@ -32,6 +35,9 @@ class WebhookReceiverTest extends TestCase
         $response->assertCreated();
     }
 
+    /**
+     * @test
+     */
     #[Test]
     public function weGetABadRequestIfWeHaveInvalidData(): void
     {
@@ -52,6 +58,9 @@ class WebhookReceiverTest extends TestCase
         $response->assertSee('Test exception');
     }
 
+    /**
+     * @test
+     */
     #[Test]
     public function weGetAnInternalServerErrorIfWeHaveAnUnknownError(): void
     {
