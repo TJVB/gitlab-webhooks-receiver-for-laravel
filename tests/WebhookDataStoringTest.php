@@ -6,6 +6,7 @@ namespace TJVB\GitLabWebhooks\Tests;
 
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Support\Facades\Event;
+use PHPUnit\Framework\Attributes\Test;
 use TJVB\GitLabWebhooks\Actions\StoreInComingWebhookRequestData;
 use TJVB\GitLabWebhooks\Events\HookStored;
 use TJVB\GitLabWebhooks\Exceptions\InvalidInputException;
@@ -16,9 +17,7 @@ class WebhookDataStoringTest extends TestCase
 {
     use DatabaseMigrations;
 
-    /**
-     * @test
-     */
+    #[Test]
     public function weStoreTheWebhookData(): void
     {
         // setup / mock
@@ -37,9 +36,7 @@ class WebhookDataStoringTest extends TestCase
         Event::assertDispatched(HookStored::class);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function weGetAnExceptionIfWeHaveInvalidJson(): void
     {
         // setup / mock
@@ -57,9 +54,7 @@ class WebhookDataStoringTest extends TestCase
         Event::assertNotDispatched(HookStored::class);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function weSeeTheDifferenceBetweenAnSystemHookAndNormalHook(): void
     {
         // setup / mock
@@ -91,9 +86,7 @@ class WebhookDataStoringTest extends TestCase
         });
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function weStoreTheObjectKind(): void
     {
         // setup / mock
@@ -113,9 +106,7 @@ class WebhookDataStoringTest extends TestCase
         Event::assertDispatched(HookStored::class);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function weStoreTheEventData(): void
     {
         // setup / mock
