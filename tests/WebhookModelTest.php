@@ -19,6 +19,7 @@ class WebhookModelTest extends TestCase
     /**
      * @test
      */
+    #[Test]
     public function weImplementTheContract(): void
     {
         // setup / mock
@@ -33,6 +34,7 @@ class WebhookModelTest extends TestCase
     /**
      * @test
      */
+    #[Test]
     public function weCanStoreTheModel(): void
     {
         // setup / mock
@@ -61,6 +63,9 @@ class WebhookModelTest extends TestCase
         ]);
     }
 
+    /**
+     * @test
+     */
     #[Test]
     public function weCanRemoveTheModel(): void
     {

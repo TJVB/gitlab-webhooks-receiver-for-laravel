@@ -7,6 +7,7 @@ namespace TJVB\GitLabWebhooks\Tests;
 use Closure;
 use Illuminate\Contracts\Config\Repository;
 use Illuminate\Http\JsonResponse;
+use PHPUnit\Framework\Attributes\Test;
 use stdClass;
 use TJVB\GitLabWebhooks\Http\Middleware\EnsureSecretTokenIsValid;
 use TJVB\GitLabWebhooks\Tests\Fixtures\WebHookRequest;
@@ -16,6 +17,7 @@ class WebhookMiddlewareTest extends TestCase
     /**
      * @test
      */
+    #[Test]
     public function weHandleAValidRequest(): void
     {
         // setup / mock
@@ -37,6 +39,7 @@ class WebhookMiddlewareTest extends TestCase
     /**
      * @test
      */
+    #[Test]
     public function weHandleARequestWithoutToken(): void
     {
         // setup / mock
@@ -57,6 +60,7 @@ class WebhookMiddlewareTest extends TestCase
     /**
      * @test
      */
+    #[Test]
     public function weHandleAnInvalidToken(): void
     {
         // setup / mock
@@ -79,6 +83,7 @@ class WebhookMiddlewareTest extends TestCase
     /**
      * @test
      */
+    #[Test]
     public function weHandleARequestThatDoesntHaveTheHeaderFunction(): void
     {
         // setup / mock
@@ -100,6 +105,7 @@ class WebhookMiddlewareTest extends TestCase
     /**
      * @test
      */
+    #[Test]
     public function weDoNotPassAnInvalidSecretsConfig(): void
     {
         // setup / mock

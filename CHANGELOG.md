@@ -7,6 +7,7 @@ All notable changes to `tjvb/gitlab-webhooks-receiver-for-laravel` will be docum
 
 ### Added
 - Support PHP 8.5
+- Add Laravel 13 support.
 
 ## 2.5.0 - 2025-10-07
 ### Added

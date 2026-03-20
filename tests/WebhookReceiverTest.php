@@ -6,6 +6,7 @@ namespace TJVB\GitLabWebhooks\Tests;
 
 use Exception;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use PHPUnit\Framework\Attributes\Test;
 use Symfony\Component\HttpFoundation\Response;
 use TJVB\GitLabWebhooks\Contracts\Actions\InComingWebhookRequestStoring;
 use TJVB\GitLabWebhooks\Exceptions\InvalidInputException;
@@ -18,6 +19,7 @@ class WebhookReceiverTest extends TestCase
     /**
      * @test
      */
+    #[Test]
     public function weCanStoreAValidRequest(): void
     {
         // setup / mock
@@ -36,6 +38,7 @@ class WebhookReceiverTest extends TestCase
     /**
      * @test
      */
+    #[Test]
     public function weGetABadRequestIfWeHaveInvalidData(): void
     {
         // setup / mock
@@ -58,6 +61,7 @@ class WebhookReceiverTest extends TestCase
     /**
      * @test
      */
+    #[Test]
     public function weGetAnInternalServerErrorIfWeHaveAnUnknownError(): void
     {
         // setup / mock
